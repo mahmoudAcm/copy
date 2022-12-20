@@ -7,3 +7,7 @@ from github
 git clone https://github.com/mahmoudAcm/copy.git
 npm run copy {source} {destination}
 ```
+or as node_modules
+```
+npm install https://github.com/mahmoudAcm/copy.git
+```
