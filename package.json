@@ -1,0 +1,31 @@
+{
+  "name": "@mahmoudacm/copy",
+  "version": "1.0.0",
+  "description": "A small NodeJs script that copies files form one place to another.",
+  "main": "copy.js",
+  "scripts": {
+    "copy": "node copy.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mahmoudAcm/copy.git"
+  },
+  "keywords": [
+    "nodeJs",
+    "copy",
+    "fs",
+    "path"
+  ],
+  "author": "Mahmoud Tarek",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mahmoudAcm/copy/issues"
+  },
+  "homepage": "https://github.com/mahmoudAcm/copy#readme",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  },
+  "dependencies": {
+    "npm": "^9.2.0"
+  }
+}
