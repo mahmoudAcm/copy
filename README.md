@@ -9,5 +9,5 @@ npm run copy {source} {destination}
 ```
 or as node_modules
 ```
-npm install https://github.com/mahmoudAcm/copy.git
+npm install --save-dev https://github.com/mahmoudAcm/copy.git
 ```
