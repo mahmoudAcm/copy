@@ -1,2 +1,2 @@
-const copy = requrie('./copy.js');
+const copy = requrie("./copy.js");
 module.exports = copy;
