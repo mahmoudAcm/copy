@@ -24,8 +24,5 @@
   "homepage": "https://github.com/mahmoudAcm/copy#readme",
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
-  },
-  "dependencies": {
-    "npm": "^9.2.0"
   }
 }
