@@ -37,21 +37,25 @@ class Queue {
     }
 }
 
-const travserseFolder = (currentPath) => {
+function copy(source, destination, makeFileOrDirectory) {
     const queue = new Queue();
-    const paths = [];
-    queue.push(currentPath);
+    queue.push(source);
     while (!queue.isEmpty()) {
         var dir = queue.pop();
         var stat = fs.statSync(dir);
-        paths.push({ path: dir, isFile: stat.isFile(), isDirectory: stat.isDirectory() });
+
+        if (source === path.dirname(destination) && dir === destination) {
+            continue;
+        }
+
+        makeFileOrDirectory(dir, stat.isFile(), stat.isDirectory());
+
         if (stat.isDirectory()) {
             for (var name of fs.readdirSync(dir)) {
                 queue.push(path.join(dir, name))
             }
         }
     }
-    return paths;
 }
 
 /**
@@ -66,6 +70,10 @@ const travserseFolder = (currentPath) => {
 function copySync(source, destination) {
     console.log('Start coping...');
     console.time("Finished at");
+
+    source = path.resolve(source);
+    destination = path.resolve(destination);
+
     if (!fs.existsSync(destination)) {
         fs.mkdirSync(destination, {
             recursive: true
@@ -76,28 +84,22 @@ function copySync(source, destination) {
 
     const stat = fs.statSync(source);
     if (stat.isFile()) {
-        const content = fs.readFileSync(source);
-        const filename = path.basename(source);
-        fs.writeFileSync(path.join(destination, filename), content);
+        fs.copyFileSync(source, destination);
         return;
     }
 
-    const paths = travserseFolder(source);
-    for (let item of paths) {
-        const basename = path.basename(source);
-        let dir__destination =
-            basename === "." ? destination + "/" + item.path
-                : item.path.replace(basename, destination);
-
-        if (item.isFile) {
-            var content = fs.readFileSync(item.path);
-            fs.writeFileSync(dir__destination, content)
-        } else if (item.isDirectory) {
+    console.log("Coping files to " + destination);
+    copy(source, destination, (path, isFile, isDirectory) => {
+        let dir__destination = path.replace(source, destination);
+        if (isFile) {
+            fs.copyFileSync(path, dir__destination);
+        } else if (isDirectory) {
             if (!fs.existsSync(dir__destination)) {
                 fs.mkdirSync(dir__destination);
             }
         }
-    }
+    });
+
     console.timeEnd("Finished at")
 }
 

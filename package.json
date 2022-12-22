@@ -1,6 +1,6 @@
 {
   "name": "@mahmoudacm/copy",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A small NodeJs script that copies files form one place to another.",
   "main": "copy.js",
   "scripts": {
